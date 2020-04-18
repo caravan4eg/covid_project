@@ -4,20 +4,31 @@ from django.contrib.auth.models import User
 
 class Fact(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    disease_name = models.CharField(max_length=250)
-    city = models.CharField(max_length=250)
-    rayon = models.CharField(max_length=250)
-    oblast = models.CharField(max_length=250)
-    sick = models.IntegerField()  # заболело
-    dead = models.IntegerField()  # умерло
-    recovered = models.IntegerField()  # выздоровело
-    tests_made = models.IntegerField()
+    where_is_it = models.ForeignKey('Location', on_delete=models.CASCADE)
+    disease_name = models.CharField(max_length=250, verbose_name = 'Название болезни')
+    sick = models.IntegerField(verbose_name = 'Количество заболевших')  # заболело
+    dead = models.IntegerField(verbose_name = 'Количество умерших')  # умерло
+    recovered = models.IntegerField(verbose_name = 'Количество выздоровевших')  # выздоровело
+    tests_made = models.IntegerField(verbose_name = 'Сделано тестов')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.created_at} {self.disease_name}'
 
-    # sick_day_changes = models.IntegerField()  # изменение числа заболевших за сутки
-    # recovered_day_changes = models.IntegerField()  # выздоровело
-    # dead_day_changes =  models.IntegerField()  # изменение числа умерших за сутки
+    class Meta:
+        verbose_name = 'Факт'
+        verbose_name_plural = 'Факты'
+
+
+class Location(models.Model):
+    place = models.CharField(max_length=250, verbose_name = 'Населенный пункт')
+    rayon = models.CharField(max_length=250, verbose_name = 'Район')
+    oblast = models.CharField(max_length=250, verbose_name = 'Область')
+
+    def __str__(self):
+        return f'{self.place} / {self.rayon} / {self.oblast}'
+
+    class Meta:
+        verbose_name = 'Населенный пункт'
+        verbose_name_plural = 'Населенные пункты'
