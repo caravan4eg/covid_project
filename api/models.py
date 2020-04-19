@@ -40,7 +40,7 @@ class Location(models.Model):
                                verbose_name='Населенный пункт')
 
     def __str__(self):
-        return f'{self.country} {self.city}'
+        return f'{self.city}/{self.country} '
 
     class Meta:
         verbose_name = 'Населенный пункт'
@@ -75,6 +75,7 @@ class Project(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    project_contact = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title

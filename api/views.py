@@ -1,5 +1,7 @@
 # TODO откуда брать данные
 # TODO посмотреть колины аналоги
+# TODO загрузка фото
+# TODO make mockup like https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU:ru
 
 from rest_framework import generics, viewsets
 from rest_framework.response import Response
@@ -59,10 +61,6 @@ class PhotoViewSet(viewsets.ModelViewSet):
 
 
 class ApiRoot(generics.GenericAPIView):
-    # TODO: add info and docs about project
-    """
-
-      """
     name = 'CovidMonitor API-root'
 
     def get(self, request, *args, **kwargs):
