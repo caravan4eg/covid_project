@@ -1,6 +1,7 @@
 # TODO откуда брать данные
 # TODO посмотреть колины аналоги
-# TODO загрузка фото
+# TODO загрузка фото?
+# TODO setup PostgreSQL
 # TODO make mockup like https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU:ru
 
 from rest_framework import generics, viewsets
@@ -54,7 +55,6 @@ class ProjectList(generics.ListCreateAPIView):
 
 
 class PhotoViewSet(viewsets.ModelViewSet):
-
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
     name = 'photoviewset'
@@ -69,4 +69,5 @@ class ApiRoot(generics.GenericAPIView):
             'postlist': reverse(PostList.name, request=request),
             'locationlist': reverse(LocationList.name, request=request),
             'factlist': reverse(FactList.name, request=request),
+            'photoviewset': reverse(PhotoViewSet.name, request=request),
         })

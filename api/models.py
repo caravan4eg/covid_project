@@ -14,7 +14,8 @@ class Fact(models.Model):
     dead = models.IntegerField(verbose_name='Количество умерших')
     recovered = models.IntegerField(verbose_name='Количество выздоровевших')
     tests_made = models.IntegerField(verbose_name='Сделано тестов')
-    created_at = models.DateTimeField(auto_now_add=True)
+    measured_at = models.DateTimeField(blank=True, null=True)  # time when measure was made
+    created_at = models.DateTimeField(auto_now_add=True)  # time of adding to DB
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -51,31 +52,32 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     where_is_it = models.ForeignKey('Location',
                                     on_delete=models.CASCADE)
-    src_logo = models.ImageField(upload_to='img/logo/', blank=True, null=True)
     src_name = models.CharField(max_length=250)
-    src_url = models.URLField()
-    photo = models.ImageField(upload_to='img/post/', blank=True, null=True)
-    title = models.CharField(max_length=250)
-    body = models.TextField()
+    src_logo_url = models.URLField(blank=True, null=True)
+    post_origin_url = models.URLField(blank=True, null=True)
+    post_photo_url = models.URLField(blank=True, null=True)
+    post_title = models.CharField(max_length=250, blank=True, null=True)
+    post_body = models.TextField()
+    post_origin_created_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.post_title
 
 
 class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     where_is_it = models.ForeignKey('Location',
                                     on_delete=models.CASCADE)
-    logo = models.ImageField(upload_to='img/logo/', blank=True, null=True)
+    logo_url = models.URLField(blank=True, null=True)
+    project_url = models.URLField(blank=True, null=True)
+    project_contact = models.TextField(blank=True, null=True)
     title = models.CharField(max_length=250)
-    url = models.URLField()
-    photo = models.ImageField(upload_to='img/project/', blank=True, null=True)
+    photo_url = models.URLField(blank=True, null=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    project_contact = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
