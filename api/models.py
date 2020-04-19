@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 class Fact(models.Model):
@@ -26,16 +27,20 @@ class Fact(models.Model):
 
 class Location(models.Model):
     city = models.CharField(max_length=100,
-                            verbose_name='Населенный пункт')
+                            verbose_name='Населенный пункт',
+                            blank=True)
     district = models.CharField(max_length=100,
-                                verbose_name='Район')
+                                verbose_name='Район',
+                                blank=True)
     region = models.CharField(max_length=100,
-                              verbose_name='Область')
+                              verbose_name='Область',
+                              blank=True)
     country = models.CharField(max_length=50,
-                                 verbose_name='Населенный пункт')
+                               default='Беларусь',
+                               verbose_name='Населенный пункт')
 
     def __str__(self):
-        return f'{self.place}'
+        return f'{self.country} {self.city}'
 
     class Meta:
         verbose_name = 'Населенный пункт'
@@ -46,10 +51,10 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     where_is_it = models.ForeignKey('Location',
                                     on_delete=models.CASCADE)
-    src_logo = models.ImageField(upload_to='logos/%Y/%m/%d/')
+    src_logo = models.ImageField(upload_to='img/logo/', blank=True, null=True)
     src_name = models.CharField(max_length=250)
     src_url = models.URLField()
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    photo = models.ImageField(upload_to='img/post/', blank=True, null=True)
     title = models.CharField(max_length=250)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -63,10 +68,10 @@ class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     where_is_it = models.ForeignKey('Location',
                                     on_delete=models.CASCADE)
-    logo = models.ImageField(upload_to='logos/%Y/%m/%d/')
+    logo = models.ImageField(upload_to='img/logo/', blank=True, null=True)
     title = models.CharField(max_length=250)
     url = models.URLField()
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    photo = models.ImageField(upload_to='img/project/', blank=True, null=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -74,14 +79,19 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
+
 class Photo(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     where_is_it = models.ForeignKey('Location',
                                     on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     url = models.URLField()
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
-    description = models.TextField()
+    photo = models.ImageField(upload_to='img/photo/')
+    description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -89,5 +99,5 @@ class Photo(models.Model):
         return f'{self.title}'
 
     class Meta:
-        verbose_name = 'Населенный пункт'
-        verbose_name_plural = 'Населенные пункты'
+        verbose_name = 'Фото'
+        verbose_name_plural = 'Фотографии'

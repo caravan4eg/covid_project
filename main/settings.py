@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     # 3rd-party apps
     'rest_framework',
+    # 'Pillow',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
         ]
 }
+
+
+# Media Folder settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
