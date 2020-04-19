@@ -25,12 +25,14 @@ class Fact(models.Model):
 
 
 class Location(models.Model):
-    place = models.CharField(max_length=250,
-                             verbose_name='Населенный пункт')
-    rayon = models.CharField(max_length=250,
-                             verbose_name='Район')
-    oblast = models.CharField(max_length=250,
+    city = models.CharField(max_length=100,
+                            verbose_name='Населенный пункт')
+    district = models.CharField(max_length=100,
+                                verbose_name='Район')
+    region = models.CharField(max_length=100,
                               verbose_name='Область')
+    country = models.CharField(max_length=50,
+                                 verbose_name='Населенный пункт')
 
     def __str__(self):
         return f'{self.place}'
@@ -42,6 +44,8 @@ class Location(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    where_is_it = models.ForeignKey('Location',
+                                    on_delete=models.CASCADE)
     src_logo = models.ImageField(upload_to='logos/%Y/%m/%d/')
     src_name = models.CharField(max_length=250)
     src_url = models.URLField()
@@ -54,8 +58,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
 class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    where_is_it = models.ForeignKey('Location',
+                                    on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='logos/%Y/%m/%d/')
     title = models.CharField(max_length=250)
     url = models.URLField()
@@ -66,3 +73,21 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+class Photo(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    where_is_it = models.ForeignKey('Location',
+                                    on_delete=models.CASCADE)
+    title = models.CharField(max_length=250)
+    url = models.URLField()
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Населенный пункт'
+        verbose_name_plural = 'Населенные пункты'
