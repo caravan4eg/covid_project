@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
 
 
 class Fact(models.Model):
@@ -14,8 +13,10 @@ class Fact(models.Model):
     dead = models.IntegerField(verbose_name='Количество умерших')
     recovered = models.IntegerField(verbose_name='Количество выздоровевших')
     tests_made = models.IntegerField(verbose_name='Сделано тестов')
-    measured_at = models.DateTimeField(blank=True, null=True)  # time when measure was made
-    created_at = models.DateTimeField(auto_now_add=True)  # time of adding to DB
+    measured_at = models.DateTimeField(
+        blank=True, null=True)  # time when measure was made
+    created_at = models.DateTimeField(
+        auto_now_add=True)  # time of adding to DB
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -37,7 +38,7 @@ class Location(models.Model):
                               verbose_name='Область',
                               blank=True)
     country = models.CharField(max_length=50,
-                               default='Беларусь',
+                               default=1,
                                verbose_name='Населенный пункт')
 
     def __str__(self):
@@ -49,21 +50,22 @@ class Location(models.Model):
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    where_is_it = models.ForeignKey('Location',
-                                    on_delete=models.CASCADE)
-    src_name = models.CharField(max_length=250)
-    src_logo_url = models.URLField(blank=True, null=True)
-    post_origin_url = models.URLField(blank=True, null=True)
-    post_photo_url = models.URLField(blank=True, null=True)
-    post_title = models.CharField(max_length=250, blank=True, null=True)
-    post_body = models.TextField()
-    post_origin_created_at = models.DateTimeField(blank=True, null=True)
+    source_name = models.CharField(max_length=250)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, default='1')
+    author = models.CharField(max_length=250, default='author', blank=True, null=True)
+    title = models.CharField(max_length=250, blank=True, null=True)
+    url = models.URLField(default='https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU:ru')
+    img_url = models.URLField(blank=True, null=True)
+    description = models.TextField()
+    published_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    where_is_it = models.ForeignKey('Location',
+                                    on_delete=models.CASCADE,
+                                    default=1)
 
     def __str__(self):
-        return self.post_title
+        return self.title
 
 
 class Project(models.Model):
