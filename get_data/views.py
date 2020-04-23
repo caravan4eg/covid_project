@@ -46,16 +46,19 @@ def get_data(request):
         }
         print(data)
         write_csv(data)
-        write_db(data)
+        # write_db(data)
     return render(request, 'index.html')
 
 
 def write_db(data):
-    post = Post(source_name = data['source_name'],
-                author = data['author'],
-                title = data['title'],
-                url = data['url'],
-                img_url = data['img_url'],
-                published_at = data['published_at'],
-                description = data['description'])
-    post.save()
+    post = Post(source_name=data['source_name'],
+                author=data['author'],
+                title=data['title'],
+                url=data['url'],
+                img_url=data['img_url'],
+                published_at=data['published_at'],
+                description=data['description'])
+    # check if we have already this post
+    if (not Post.objects.filter(title__icontains=data['title'])) or \
+            (not Post.objects.filter(url__icontains=data['url'])):
+        post.save()
