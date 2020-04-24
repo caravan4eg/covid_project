@@ -5,7 +5,7 @@ from .models import Fact, Location, Post, Project, Photo
 
 class FactSerializer(serializers.ModelSerializer):
     class Meta:
-        exclude = ('author', 'updated_at')
+        exclude = ('created_at', 'updated_at',)
         model = Fact
 
 
@@ -17,7 +17,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
-        exclude = ('author', 'updated_at')
+        exclude = ('updated_at',)
         model = Post
 
 
@@ -29,5 +29,5 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
-        exclude = ('author', 'updated_at')
+        exclude = ('updated_at',)
         model = Photo

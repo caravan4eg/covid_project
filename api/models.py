@@ -3,16 +3,13 @@ from django.contrib.auth.models import User
 
 
 class Fact(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    where_is_it = models.ForeignKey('Location',
-                                    on_delete=models.CASCADE)
-    disease_name = models.CharField(
-        max_length=250,
-        verbose_name='Название болезни')
-    sick = models.IntegerField(verbose_name='Количество заболевших')
-    dead = models.IntegerField(verbose_name='Количество умерших')
+    country = models.CharField(max_length=100, default='Беларусь')
+    province = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    confirmed = models.IntegerField(verbose_name='Количество заболевших')
+    deaths = models.IntegerField(verbose_name='Количество умерших')
     recovered = models.IntegerField(verbose_name='Количество выздоровевших')
-    tests_made = models.IntegerField(verbose_name='Сделано тестов')
+    tests_made = models.IntegerField(verbose_name='Сделано тестов', blank=True, null=True)
     measured_at = models.DateTimeField(
         blank=True, null=True)  # time when measure was made
     created_at = models.DateTimeField(
@@ -20,7 +17,7 @@ class Fact(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.created_at} {self.disease_name}'
+        return f'{self.measured_at} {self.country}'
 
     class Meta:
         verbose_name = 'Факт'
@@ -52,9 +49,11 @@ class Location(models.Model):
 class Post(models.Model):
     source_name = models.CharField(max_length=250)
     # author = models.ForeignKey(User, on_delete=models.CASCADE, default='1')
-    author = models.CharField(max_length=250, default='author', blank=True, null=True)
+    author = models.CharField(
+        max_length=250, default='author', blank=True, null=True)
     title = models.CharField(max_length=250, blank=True, null=True)
-    url = models.URLField(default='https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU:ru')
+    url = models.URLField(
+        default='https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU:ru')
     img_url = models.URLField(blank=True, null=True)
     description = models.TextField()
     published_at = models.DateTimeField(blank=True, null=True)
