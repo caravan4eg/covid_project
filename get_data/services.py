@@ -1,10 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import ListView, TemplateView
-
 import requests
 import csv
-from api.models import Post, Fact, Project
+from api.models import Post, Fact
 
 
 def get_covid_data():
@@ -92,32 +88,3 @@ def write_post_db(data):
         post.save()
     else:
         print('It\'s OK! We have already this info!')
-
-
-class HomePageView(ListView):
-    model = Project
-    # context_object_name = 'posts'
-    template_name = 'home.html'
-    # get new posts from News Google API
-    get_google_post()
-    # get new covid data from https://api.covid19api.com
-    get_covid_data()
-
-    def get_context_data(self, **kwargs):
-        context = super(HomePageView, self).get_context_data(**kwargs)
-        context['projects8'] = Project.objects.all()[:8]
-        context['posts8'] = Post.objects.order_by('-published_at')[:9]
-        context['facts_last'] = Fact.objects.order_by('-measured_at')[0]
-
-        context['last_d'] = context['facts_last'].measured_at.day
-        context['last_m'] = context['facts_last'].measured_at.month
-        context['last_y'] = context['facts_last'].measured_at.year
-        context['loop_times'] = range(1, 8)
-        context['i'] = 0
-
-
-        return context
-
-
-def demo(request):
-    return render(request, 'demo-medical.html')

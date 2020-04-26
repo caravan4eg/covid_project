@@ -74,9 +74,10 @@ class Project(models.Model):
     logo_url = models.URLField(blank=True, null=True)
     project_url = models.URLField(blank=True, null=True)
     project_contact = models.TextField(blank=True, null=True)
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=28)
     photo_url = models.URLField(blank=True, null=True)
     description = models.TextField()
+    short_description = models.CharField(max_length=300, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
