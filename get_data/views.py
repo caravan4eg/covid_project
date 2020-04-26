@@ -106,7 +106,7 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['projects8'] = Project.objects.all()[:8]
-        context['posts8'] = Post.objects.order_by('-published_at')[:9]
+        context['posts8'] = Post.objects.order_by('-published_at')[:7]
         context['facts_last'] = Fact.objects.order_by('-measured_at')[0]
 
         context['last_d'] = context['facts_last'].measured_at.day

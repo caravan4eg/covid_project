@@ -1,11 +1,13 @@
-
+<!-- TODO картинки к проектам и новостям -->
+<!-- TODO графики рисовать -->
+<!--TODO нормальный парсинг статей и данных-->
 {% load static %}
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="covidMonitor" />
+	<meta name="author" content="caravan4eg" />
 
 	<!-- Stylesheets
 	============================================= -->
@@ -95,7 +97,7 @@
 							<li><a href="#" class="si-github"><span class="ts-icon"><i class="icon-github-circled"></i></span><span class="ts-text">Github</span></a></li>
 							<li><a href="#" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
 
-							<li><a href="mailto:covidmonitor@canvas.com" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">covidmonitor@gmail.com</span></a></li>
+							<li><a href="mailto:covidmonitor@gmail.com" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">covidmonitor@gmail.com</span></a></li>
 						</ul>
 					</div><!-- #top-social end -->
 
@@ -127,9 +129,9 @@
 					<nav id="primary-menu" class="style-3">
 
 						<ul>
-							<li class="current"><a href="#"><div>Главная</div></a></li>
-							<li><a href="demos/medical/about-us.html"><div>Проекты</div></a></li>
-							<li><a href="demos/medical/departments.html"><div>Коронавирус</div></a></li>
+							<li class="current"><a href="{% url 'home' %} "><div>Главная</div></a></li>
+							<li><a href="demos/medical/about-us.html"><div>Новости</div></a></li>
+							<li><a href="demos/medical/departments.html"><div>Проекты</div></a></li>
 							{% comment %} <li><a href="demos/medical/appointment.html"><div>Appointment</div></a></li> {% endcomment %}
 							{% comment %} <li><a href="demos/medical/doctors.html"><div>Новости</div></a>
 								<ul>
@@ -138,7 +140,7 @@
 									<li><a href="demos/medical/doctors.html"><div>4 columns</div></a></li>
 								</ul>
 							</li> {% endcomment %}
-							<li><a href="demos/medical/blog.html"><div>Все новости</div></a></li>
+							<li><a href="demos/medical/blog.html"><div>Коронавирус</div></a></li>
 							<li><a href="./api/v1"><div>API</div></a></li>
 							<li><a href="./api/v1"><div>О нас</div></a></li>
 
@@ -202,7 +204,7 @@
 										<a href="https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Belarus"><i class="icon-stack i-alt"></i></a>
 									</div>
 									<div class="counter counter-small"><span data-from="1" data-to=" {{ last_d }}" data-refresh-interval="250" data-speed="2000"></span></div>
-									<h5 class="nomargin color">Данные на: {{last_d}}/{{last_m}}/{{last_y}}</h5>
+									<h5 class="nomargin color">{{last_d}}/{{last_m}}/{{last_y}}</h5>
 									<div class="d-block d-md-block d-lg-none bottommargin"></div>
 								</div>
 							</div>
@@ -251,7 +253,7 @@
 			<div class="content-wrap">
 				<div class="clear"></div>
 				<div class="container clearfix">
-					<div class="fanКоличество заболевшихcy-title title-border">
+					<div class="fancy-title title-border">
 						<h3>Уровень заболеваемости по областям</h3>
 					</div>
 					<div class="row bottommargin-sm clearfix">
@@ -272,22 +274,9 @@
 									<div class="legend" style="-webkit-column-break-inside: avoid;page-break-inside: avoid;break-inside: avoid-column"><span class="legend-color" style="display:inline-block; width:1.5em; height:1.5em; margin:1px 0; border:1px solid black; background-color: #ffc0c0; color:black; font-size:100%; text-align:center;">&nbsp;</span>&nbsp;1–199 подтвержденных случаев</div></div>
 
 								<!-- legenda end -->
-
-								<div class="entry-title">
-									<h3><a href="blog-single.html">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
-								</div>
-								<ul class="entry-meta clearfix">
-									<li><i class="icon-calendar3"></i> 17th Jan 2014</li>
-									<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 31</a></li>
-									<li><a href="#"><i class="icon-camera-retro"></i></a></li>
-								</ul>
-								<div class="entry-content">
-
-								</div>
 							</div>
-
 						</div>
-
+					<!-- News right site -->
 						<div class="col-lg-4 bottommargin">
 						{% if posts8 %}
 							{% for  post in posts8  %}
@@ -306,12 +295,8 @@
 							</div>
 							{% endfor %}
 						{% endif %}
-
 						</div>
-
 					</div>
-
-
 				</div>
 
 				<div class="clear"></div>
@@ -478,16 +463,16 @@
 								>
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ project.project_url }}"><img class="image_fade" src="{% static 'images/magazine/thumb/11.jpg' %} " alt="Image"></a>
+										<a href="{{ project.project_url }}" target="_blank"><img class="image_fade" src="{% static 'images/magazine/thumb/11.jpg' %} " alt="Image"></a>
 									</div>
 									<div class="entry-title">
-										<h3><a href="{{ project.project_url }}">{{ project.short_description | truncatechars:50}}</a></h3>
+										<h3><a href="{{ project.project_url }}" target="_blank">{{ project.short_description | truncatechars:50}}</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
-										<li><a href="{{ project.project_url }}"><i class="icon-comments"></i> {{ project.title }}</a></li>
+										<li><a href="{{ project.project_url }}" target="_blank"><i class="icon-comments"></i> {{ project.title }}</a></li>
 									</ul>
 									<div class="entry-content">
-										<p>{{ project.description | truncatechars:299 }}</p>
+										<p>{{ project.description | truncatechars:220 }}</p>
 									</div>
 								</div>
 							</div>
@@ -498,8 +483,6 @@
 
 					</div>
 				<!-- Проекты light end-->
-				<!--=============================================-->
-
 					</div>
 				</div>
 			</div>
@@ -508,48 +491,31 @@
 		<!-- Footer
 		============================================= -->
 		<footer id="footer" class="dark">
-
 			<div class="container">
-
 				<!-- Footer Widgets
 				============================================= -->
 				<div class="footer-widgets-wrap clearfix">
-
 					<div class="col_two_third">
-
 						<div class="col_one_third">
-
 							<div class="widget clearfix">
 								<p><strong>Приведенные данные  могут не учитывать последние изменения</strong></p>
-
 								<div style="background: url('{% static 'images/world-map.png' %} ') no-repeat center center; background-size: 100%;">
 									<address>
 										<abbr title="Email Address"><strong>Email:</strong></abbr> covidmonitor@gmail.com
 									</address>
 								</div>
-
 							</div>
-
 						</div>
-
 						<div class="col_one_third">
-
 							<div class="widget widget_links clearfix">
-
 								<h4>Blogroll</h4>
-
 								<ul>
 									<li><a href="http://codex.wordpress.org/">Documentation</a></li>
 									<li><a href="http://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
 									<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
 									<li><a href="http://wordpress.org/support/">Support Forums</a></li>
-									<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
-									<li><a href="http://wordpress.org/news/">WordPress Blog</a></li>
-									<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
 								</ul>
-
 							</div>
-
 						</div>
 
 						<div class="col_one_third col_last">
@@ -581,31 +547,24 @@
 
 										</div>
 									</div>
-																<div class="spost clearfix">
+									<div class="spost clearfix">
 										<div class="entry-c">
 											<div class="entry-title">
 												<h4><a href="http://minzdrav.gov.by/ru/">Минздрав РБ</a></h4>
 											</div>
-
 										</div>
 									</div>
 								</div>
 							</div>
-
 						</div>
-
 					</div>
-
 					<div class="col_one_third col_last">
-
 						<div class="widget clearfix" style="margin-bottom: -20px;">
-
 							<div class="row">
 								<div class="col-lg-4 bottommargin-sm">
 									<div class="counter counter-small"><span data-from="50" data-to="{{ facts_last.confirmed }}" data-refresh-interval="150" data-speed="3000" data-comma="true"></span></div>
 									<h5 class="nobottommargin">Заболели</h5>
 								</div>
-
 								<div class="col-lg-4 bottommargin-sm">
 									<div class="counter counter-small"><span data-from="550" data-to="{{ facts_last.recovered }}" data-refresh-interval="50" data-speed="3000" data-comma="true"></span></div>
 									<h5 class="nobottommargin">Выздоровели</h5>
@@ -664,69 +623,6 @@
 				</div><!-- .footer-widgets-wrap end -->
 
 			</div>
-
-			<!-- Copyrights
-			============================================= -->
-			<div id="copyrights">
-
-				<div class="container clearfix">
-
-					<div class="col_half">
-						Copyrights &copy; 2020 All Rights Reserved by caravan4eg<br>
-						{% comment %} <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div> {% endcomment %}
-					</div>
-
-					<div class="col_half col_last tright">
-						<div class="fright clearfix">
-							<a href="#" class="social-icon si-small si-borderless si-facebook">
-								<i class="icon-facebook"></i>
-								<i class="icon-facebook"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-twitter">
-								<i class="icon-twitter"></i>
-								<i class="icon-twitter"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-gplus">
-								<i class="icon-gplus"></i>
-								<i class="icon-gplus"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-pinterest">
-								<i class="icon-pinterest"></i>
-								<i class="icon-pinterest"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-vimeo">
-								<i class="icon-vimeo"></i>
-								<i class="icon-vimeo"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-github">
-								<i class="icon-github"></i>
-								<i class="icon-github"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-yahoo">
-								<i class="icon-yahoo"></i>
-								<i class="icon-yahoo"></i>
-							</a>
-
-							<a href="#" class="social-icon si-small si-borderless si-linkedin">
-								<i class="icon-linkedin"></i>
-								<i class="icon-linkedin"></i>
-							</a>
-						</div>
-
-						<div class="clear"></div>
-
-						<i class="icon-envelope2"></i> info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype
-					</div>
-
-				</div>
-
-			</div><!-- #copyrights end -->
 
 		</footer><!-- #footer end -->
 
