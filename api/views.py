@@ -12,14 +12,14 @@ from .models import (
     Location,
     Post,
     Project,
-    Photo,
+    Image,
 )
 from .serializers import (
     FactSerializer,
     LocationSerializer,
     PostSerializer,
     ProjectSerializer,
-    PhotoSerializer,
+    ImageSerializer,
 )
 
 
@@ -53,10 +53,10 @@ class ProjectList(generics.ListCreateAPIView):
     name = 'projectlist'
 
 
-class PhotoViewSet(viewsets.ModelViewSet):
-    queryset = Photo.objects.all()
-    serializer_class = PhotoSerializer
-    name = 'photoviewset'
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    name = 'imageviewset'
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -68,5 +68,5 @@ class ApiRoot(generics.GenericAPIView):
             'postlist': reverse(PostList.name, request=request),
             'locationlist': reverse(LocationList.name, request=request),
             'factlist': reverse(FactList.name, request=request),
-            'photoviewset': reverse(PhotoViewSet.name, request=request),
+            'imegeviewset': reverse(ImageViewSet.name, request=request),
         })

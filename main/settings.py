@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_PATH = os.path.abspath(os.path.dirname(__file__)) # new
+# _PATH = os.path.abspath(os.path.dirname(__file__)) # new
 
 
 # Quick-start development settings - unsuitable for production
@@ -133,11 +133,6 @@ USE_L10N = False
 USE_TZ = True
 
 DATE_FORMAT = 'd E Y'
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-
 
 # new
 REST_FRAMEWORK = {
@@ -151,15 +146,13 @@ REST_FRAMEWORK = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# me
-MEDIA_ROOT = os.path.join(_PATH, 'files', 'media')
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = os.path.join(_PATH, 'files', 'static')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(_PATH, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(_PATH, 'static'),
+# )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

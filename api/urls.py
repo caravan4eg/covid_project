@@ -7,11 +7,8 @@ from .views import (
     LocationList,
     PostList,
     ProjectList,
-    PhotoViewSet,
+    ImageViewSet,
 )
-
-# img_router = DefaultRouter()
-# img_router.register(r'img', PhotoViewSet)
 
 urlpatterns = [
     path('', ApiRoot.as_view(), name=ApiRoot.name),
@@ -20,7 +17,7 @@ urlpatterns = [
     path('locations/', LocationList.as_view(), name=LocationList.name),
     path('posts/', PostList.as_view(), name=PostList.name),
     path('projects/', ProjectList.as_view(), name=ProjectList.name),
-    path('photos/', PhotoViewSet, name=PhotoViewSet.name),
+    path('images/', ImageViewSet, name=ImageViewSet.name),
 
 
 ]

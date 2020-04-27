@@ -1,6 +1,6 @@
 # api/serializers.py
 from rest_framework import serializers
-from .models import Fact, Location, Post, Project, Photo
+from .models import Fact, Location, Post, Project, Image
 
 
 class FactSerializer(serializers.ModelSerializer):
@@ -17,17 +17,17 @@ class LocationSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
-        exclude = ('updated_at',)
+        fields = '__all__'
         model = Post
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        exclude = ('author', 'updated_at')
+        fields = '__all__'
         model = Project
 
 
-class PhotoSerializer(serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     class Meta:
-        exclude = ('updated_at',)
-        model = Photo
+        fields = '__all__'
+        model = Image
