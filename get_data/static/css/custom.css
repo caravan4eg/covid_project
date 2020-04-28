@@ -4,7 +4,23 @@
 	Add all your Custom Styled CSS here for New Styles or
 	Overwriting Default Theme Styles for Better Hanlding Updates
 -----------------------------------------------------------------*/
+.small_img{
+	display: block;
+	height: 100px;
+	width: 100px;
+	object-fit: cover;
+}
 
+.medium_img{
+	display: block;
+	height: 300px;
+	width: 400px;
+	object-fit: cover;
+}
 
-
-
+.big_img{
+	display: block;
+	height: 450px;
+	width: 750px;
+	object-fit: cover;
+}

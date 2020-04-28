@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="{% static 'css/animate.css' %} " type="text/css" />
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %} " type="text/css" />
 
+
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %} " type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- Medical Demo Specific Stylesheet -->
@@ -27,6 +28,8 @@
 
 	<link rel="stylesheet" href="{% static 'medical/fonts.css' %} " type="text/css" /><link rel="stylesheet" href="{% static 'medical/medical.css' %} " type="text/css" />
 	<link rel="stylesheet" href="{% static 'css/swiper.css' %} " type="text/css" />
+	<!--custom css-->
+	<link rel="stylesheet" href="{% static 'css/custom.css' %} " type="text/css" />
 	<!-- / -->
 
 	<!-- Document Title
@@ -281,12 +284,14 @@
 						{% if posts8 %}
 							{% for  post in posts8  %}
 							<div class="spost clearfix">
+
 								<div class="entry-image">
 									<a href="{{ post.url }}"><img src="{% static 'images/magazine/small/1.jpg' %} " alt=""></a>
 								</div>
+
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+										<h4><a href="{{ post.url }}">{{ post.title }} {{post.img_small.url}}</a></h4>
 									</div>
 									<ul class="entry-meta">
 										<li><i class="icon-calendar3"></i> {{ post.created_at | date:"j E Y" }}</li>
@@ -455,7 +460,7 @@
 						</div>
 						{% for project in projects8 %}
 							<div
-								{% if forloop.counter == 4  %}
+								{% if forloop.counter == 4 or forloop.counter == 8 %}
 									class="col_one_fourth col_last"
 								{% else %}
 									class="col_one_fourth"
@@ -463,13 +468,14 @@
 								>
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ project.project_url }}" target="_blank"><img class="image_fade" src="{{ project.img.url }} " alt="Image"></a>
+										<a href="{{ project.url }}" target="_blank"><img class="image_fade medium_img" src="{{ project.img.url }} " alt="Image"></a>
 									</div>
+
 									<div class="entry-title">
-										<h3><a href="{{ project.project_url }}" target="_blank">{{ project.short_description | truncatechars:50}}</a></h3>
+										<h3><a href="{{ project.url }}" target="_blank">{{ project.short_description | truncatechars:99}}</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
-										<li><a href="{{ project.project_url }}" target="_blank"><i class="icon-comments"></i> {{ project.title }}</a></li>
+										<li><a href="{{ project.url }}" target="_blank"><i class="icon-comments"></i> {{ project.title }}</a></li>
 									</ul>
 									<div class="entry-content">
 										<p>{{ project.description | truncatechars:220 }}</p>

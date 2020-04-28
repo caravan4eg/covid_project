@@ -98,7 +98,8 @@ def write_post_db(data):
 
 
 class HomePageView(ListView):
-    model = Project
+    # model = Project, Post, Fact
+    model = Post
     # context_object_name = 'posts'
     template_name = 'home.html'
     # get new posts from News Google API
@@ -106,12 +107,25 @@ class HomePageView(ListView):
     # get new covid data from https://api.covid19api.com
     get_covid_data()
 
+    # test
+    # post = Post.objects.order_by('-published_at')[0]
+
+    # print('Post title', post.title)
+
+    # print('Post img_url', post.img_url)
+    # print('Post img.url', post.img_small.url)
+    # print('Post img.url', post.img_medium.url)
+    # print('Post img.url', post.img_big.url)
+    # print(f'Post img_small.url, http://127.0.0.1:8000{post.img_small.url}')
+    # print('Post img.width', post.img.width)
+    # print('Post img_small.width', post.img_small.width)
+    # test
+
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['projects8'] = Project.objects.all()[:8]
+        context['projects8'] = Project.objects.all()[:9]
         context['posts8'] = Post.objects.order_by('-published_at')[:7]
         context['facts_last'] = Fact.objects.order_by('-published_at')[0]
-
         context['last_d'] = context['facts_last'].published_at.day
         context['last_m'] = context['facts_last'].published_at.month
         context['last_y'] = context['facts_last'].published_at.year
