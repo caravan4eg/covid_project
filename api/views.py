@@ -9,17 +9,13 @@ from rest_framework.reverse import reverse
 
 from .models import (
     Fact,
-    Location,
     Post,
-    Project,
-    Image,
+    Project
 )
 from .serializers import (
     FactSerializer,
-    LocationSerializer,
     PostSerializer,
     ProjectSerializer,
-    ImageSerializer,
 )
 
 
@@ -34,13 +30,6 @@ class FactDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FactSerializer
     name = 'factdetail'
 
-
-class LocationList(generics.ListCreateAPIView):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
-    name = 'locationlist'
-
-
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.order_by('-published_at')
     serializer_class = PostSerializer
@@ -53,12 +42,6 @@ class ProjectList(generics.ListCreateAPIView):
     name = 'projectlist'
 
 
-class ImageViewSet(viewsets.ModelViewSet):
-    queryset = Image.objects.all()
-    serializer_class = ImageSerializer
-    name = 'imageviewset'
-
-
 class ApiRoot(generics.GenericAPIView):
     name = 'CovidMonitor API-root'
 
@@ -66,7 +49,5 @@ class ApiRoot(generics.GenericAPIView):
         return Response({
             'projectlist': reverse(ProjectList.name, request=request),
             'postlist': reverse(PostList.name, request=request),
-            'locationlist': reverse(LocationList.name, request=request),
             'factlist': reverse(FactList.name, request=request),
-            'imegeviewset': reverse(ImageViewSet.name, request=request),
         })

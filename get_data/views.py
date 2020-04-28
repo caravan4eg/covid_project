@@ -16,20 +16,23 @@ def get_covid_data():
             'date': item['Date'],
             'confirmed': item['Confirmed'],
             'deaths': item['Deaths'],
-            'recovered': item['Recovered']
+            'recovered': item['Recovered'],
+            'tests_made': 0,
+
         }
+
         print(covid_data)
         write_covid_db(covid_data)
 
 
 def write_covid_db(covid_data):
-    covid_fact = Fact(country='Беларусь',
-                      confirmed=covid_data['confirmed'],
+    covid_fact = Fact(confirmed=covid_data['confirmed'],
                       deaths=covid_data['deaths'],
                       recovered=covid_data['recovered'],
-                      published_at=covid_data['date']
+                      published_at=covid_data['date'],
+                      tests_made=covid_data['tests_made']
                       )
-    if (not Fact.objects.filter(published_at=covid_data['date'])):
+    if (not Fact.objects.filter(published_at=covid_data['date']).exists()):
         covid_fact.save()
     else:
         print('It\'s OK! We have already this record!')
@@ -68,7 +71,7 @@ def get_google_post():
             'author': article['author'],
             'title': article['title'],
             'url': article['url'],
-            'img_main_url': article['urlToImage'],
+            'img_url': article['urlToImage'],
             'published_at': article['publishedAt'],
             'content': article['content'],
             'description': article['description']
@@ -83,7 +86,7 @@ def write_post_db(data):
                 author=data['author'],
                 title=data['title'],
                 url=data['url'],
-                img_main_url=data['img_main_url'],
+                img_url=data['img_url'],
                 published_at=data['published_at'],
                 description=data['description'])
     # check if we have already this post
@@ -99,19 +102,19 @@ class HomePageView(ListView):
     # context_object_name = 'posts'
     template_name = 'home.html'
     # get new posts from News Google API
-    ##get_google_post()
+    get_google_post()
     # get new covid data from https://api.covid19api.com
-    ##get_covid_data()
+    get_covid_data()
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['projects8'] = Project.objects.all()[:8]
         context['posts8'] = Post.objects.order_by('-published_at')[:7]
-        context['facts_last'] = Fact.objects.order_by('-measured_at')[0]
+        context['facts_last'] = Fact.objects.order_by('-published_at')[0]
 
-        context['last_d'] = context['facts_last'].measured_at.day
-        context['last_m'] = context['facts_last'].measured_at.month
-        context['last_y'] = context['facts_last'].measured_at.year
+        context['last_d'] = context['facts_last'].published_at.day
+        context['last_m'] = context['facts_last'].published_at.month
+        context['last_y'] = context['facts_last'].published_at.year
         context['loop_times'] = range(1, 8)
         context['i'] = 0
 

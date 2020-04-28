@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'get_data',
     # 3rd-party apps
     'rest_framework',
+    'imagekit',
 ]
 
 MIDDLEWARE = [

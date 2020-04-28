@@ -463,7 +463,7 @@
 								>
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ project.project_url }}" target="_blank"><img class="image_fade" src="{% static 'images/magazine/thumb/11.jpg' %} " alt="Image"></a>
+										<a href="{{ project.project_url }}" target="_blank"><img class="image_fade" src="{{ project.img.url }} " alt="Image"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="{{ project.project_url }}" target="_blank">{{ project.short_description | truncatechars:50}}</a></h3>
