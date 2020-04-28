@@ -107,19 +107,6 @@ class HomePageView(ListView):
     # get new covid data from https://api.covid19api.com
     get_covid_data()
 
-    # test
-    # post = Post.objects.order_by('-published_at')[0]
-
-    # print('Post title', post.title)
-
-    # print('Post img_url', post.img_url)
-    # print('Post img.url', post.img_small.url)
-    # print('Post img.url', post.img_medium.url)
-    # print('Post img.url', post.img_big.url)
-    # print(f'Post img_small.url, http://127.0.0.1:8000{post.img_small.url}')
-    # print('Post img.width', post.img.width)
-    # print('Post img_small.width', post.img_small.width)
-    # test
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
