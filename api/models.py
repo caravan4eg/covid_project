@@ -31,21 +31,6 @@ class Fact(models.Model):
 
 
 class Post(models.Model):
-    img = models.ImageField(
-        verbose_name='Original image', upload_to='images/', max_length=256, blank=True, null=True)
-    # img_small = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #                             ResizeToFill(100, 100)], source='img',
-    #                            format='JPEG', options={'quality': 90})
-
-    # img_medium = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #                              ResizeToFit(400, 300)], source='img',
-    #                             format='JPEG', options={'quality': 90})
-
-    # img_big = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #                           ResizeToFit(750, 450)], source='img',
-    #                          format='JPEG', options={'quality': 90})
-    # # make address
-
     title = models.CharField(max_length=250, blank=True, null=True)
     description = models.TextField()
     author = models.CharField(
@@ -53,6 +38,7 @@ class Post(models.Model):
     source_name = models.CharField(max_length=250)
     url = models.URLField(blank=True)
 
+    img = models.ImageField(upload_to='images/', blank=True, null=True)
     img_author = models.CharField(
         max_length=50, default='author', blank=True, null=True)
     img_title = models.CharField(max_length=100, blank=True, null=True)
@@ -64,34 +50,8 @@ class Post(models.Model):
     img_url = models.URLField(blank=True, null=True,
                               verbose_name='Ссылка на оригинальный имидж')
 
-    # img_small = ImageSpecField(source='img',
-    #                                   processors=[ResizeToFill(50, 50)],
-    #                                   format='JPEG',
-    #                                   options={'quality': 60})
-    # img_small = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #                         ResizeToFill(100, 100)],
-    #                         format='JPEG', options={'quality': 90})
-
-    # img_medium = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #                         ResizeToFit(400, 300)],
-    #                         format='JPEG', options={'quality': 90})
-
-    # img_big = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #                         ResizeToFit(750, 450)],
-    #                         format='JPEG', options={'quality': 90})
-    # photo = models.ImageField(verbose_name=u'Poster',upload_to=get_file_path,max_length=256, blank=True, null=True)
-    # photo_small =ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #     ResizeToFill(50, 50)], image_field='photo',
-    #     format='JPEG', options={'quality': 90})
-    # photo_medium = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #     ResizeToFit(300, 200)], image_field='photo',
-    #     format='JPEG', options={'quality': 90})
-    #    photo_big =ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-    #         ResizeToFit(640, 480)], image_field='photo',
-    #         format='JPEG', options={'quality': 90})
-
     def __str__(self):
-        return self.title
+        return f'{self.title} {self.published_at}'
 
 
 class Project(models.Model):

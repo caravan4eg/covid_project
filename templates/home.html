@@ -28,7 +28,7 @@
 	<link rel="stylesheet" href="{% static 'medical/fonts.css' %} " type="text/css" /><link rel="stylesheet" href="{% static 'medical/medical.css' %} " type="text/css" />
 	<link rel="stylesheet" href="{% static 'css/swiper.css' %} " type="text/css" />
 	<!--custom css-->
-	<link rel="stylesheet" href="{% static 'css/custom.css' %} " type="text/css" />
+	{% comment %} <link rel="stylesheet" href="{% static 'css/custom.css' %} " type="text/css" /> {% endcomment %}
 	<!-- / -->
 
 	<!-- Document Title
@@ -250,6 +250,8 @@
 
 		<!-- Content
 		============================================= -->
+		<!-- Content
+		============================================= -->
 		<section id="content">
 
 			<div class="content-wrap">
@@ -281,19 +283,24 @@
 					<!-- News right site -->
 						<div class="col-lg-4 bottommargin">
 						{% if posts8 %}
-							{% for  post in posts8  %}
+							{% for post in posts8  %}
 							<div class="spost clearfix">
-
 								<div class="entry-image">
-									<a href="{{ post.url }}"><img src="{% static 'images/magazine/small/1.jpg' %} " alt=""></a>
+									<a href="{{ post.url }}">
+									<img src="
+									{% if post.img_url %}
+										{{post.img_url }}
+									{% else %}
+										{{ post.img.url }}
+									{% endif %}
+									" target="_blank" alt="img"></a>
 								</div>
-
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="{{ post.url }}">{{ post.title }} {{post.img_small.url}}</a></h4>
+										<h4><a href="{{ post.url }}">{{ post.title }} </a></h4>
 									</div>
 									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> {{ post.created_at | date:"j E Y" }}</li>
+										<li><i class="icon-calendar3"></i> {{ post.published_at | date:"j E Y" }}</li>
 									</ul>
 								</div>
 							</div>
@@ -306,10 +313,6 @@
 				<div class="clear"></div>
 
 				<div class="container clearfix">
-
-					{% comment %} <div class="bottommargin-lg">
-						<img src="{% static 'images/magazine/ad.jpg' %} " alt="Ad" class="aligncenter notopmargin nobottommargin">
-					</div> {% endcomment %}
 
 					<div class="fancy-title title-border">
 						<h3>Статистика по дням</h3>
@@ -334,121 +337,39 @@
 
 								<!-- legenda end
 								=============================================-->
-
-
-								<div class="entry-title">
-									<h3><a href="blog-single.html">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
-								</div>
-								<ul class="entry-meta clearfix">
-									<li><i class="icon-calendar3"></i> 17th Jan 2014</li>
-									<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 31</a></li>
-									<li><a href="#"><i class="icon-camera-retro"></i></a></li>
-								</ul>
-								<div class="entry-content">
-
-								</div>
 							</div>
-
 						</div>
 
 						<div class="col-lg-4 bottommargin">
-
+						{% if posts17 %}
+							{% for post in posts17 %}
 							<div class="spost clearfix">
 								<div class="entry-image">
-									<a href="#"><img src="{% static 'images/magazine/small/1.jpg' %} " alt=""></a>
+									<a href="{{ post.url }}">
+									<img src="
+									{% if post.img_url %}
+										{{post.img_url }}
+									{% else %}
+										{{ post.img.url }}
+									{% endif %}
+									" target="_blank" alt="img"></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="#">UK government weighs Tesla's Model S for its ??5 million electric vehicle fleet</a></h4>
+										<h4><a href="{{ post.url }}">{{ post.title }} </a></h4>
 									</div>
 									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> 20th Nov 2014</li>
-										<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 01</a></li>
+										<li><i class="icon-calendar3"></i> {{ post.published_at | date:"j E Y" }}</li>
 									</ul>
 								</div>
 							</div>
-
-							<div class="spost clearfix">
-								<div class="entry-image">
-									<a href="#"><img src="{% static 'images/magazine/small/2.jpg' %} " alt=""></a>
-								</div>
-								<div class="entry-c">
-									<div class="entry-title">
-										<h4><a href="#">MIT's new robot glove can give you extra fingers</a></h4>
-									</div>
-									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> 10th Dec 2013</li>
-										<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 11</a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="spost clearfix">
-								<div class="entry-image">
-									<a href="#"><img src="{% static 'images/magazine/small/3.jpg' %} " alt=""></a>
-								</div>
-								<div class="entry-c">
-									<div class="entry-title">
-										<h4><a href="#">You can now listen to headphones through your hoodie</a></h4>
-									</div>
-									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> 20th July 2014</li>
-										<li><a href="#"><i class="icon-comments"></i> 50</a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="spost clearfix">
-								<div class="entry-image">
-									<a href="#"><img src="{% static 'images/magazine/small/4.jpg' %} " alt=""></a>
-								</div>
-								<div class="entry-c">
-									<div class="entry-title">
-										<h4><a href="#">How would you change Kobo's Aura HD e-reader?</a></h4>
-									</div>
-									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> 22nd Jan 2014</li>
-										<li><a href="#"><i class="icon-comments"></i> 55</a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="spost clearfix">
-								<div class="entry-image">
-									<a href="#"><img src="{% static 'images/magazine/small/5.jpg' %} " alt=""></a>
-								</div>
-								<div class="entry-c">
-									<div class="entry-title">
-										<h4><a href="#">Combat malaria solve, disruption advancement socio-economic</a></h4>
-									</div>
-									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> 22nd Jan 2014</li>
-										<li><a href="#"><i class="icon-comments"></i> 55</a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="spost clearfix">
-								<div class="entry-image">
-									<a href="#"><img src="{% static 'images/magazine/small/6.jpg' %} " alt=""></a>
-								</div>
-								<div class="entry-c">
-									<div class="entry-title">
-										<h4><a href="#">Interconnectivity raise awareness fighting</a></h4>
-									</div>
-									<ul class="entry-meta">
-										<li><i class="icon-calendar3"></i> 22nd Jan 2014</li>
-										<li><a href="#"><i class="icon-comments"></i> 55</a></li>
-									</ul>
-								</div>
-							</div>
-
+							{% endfor %}
+						{% endif %}
 						</div>
 					</div>
-
 				</div>
 
-				<!-- Проекты light
+				<!-- Section Projects
 				=============================================-->
 				<div class="container clearfix">
 
@@ -467,7 +388,7 @@
 								>
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ project.url }}" target="_blank"><img class="image_fade medium_img" src="{{ project.img.url }} " alt="Image"></a>
+										<a href="{{ project.url }}" target="_blank"><img class="image_fade" src="{{ project.img.url }} " alt="Image"></a>
 									</div>
 
 									<div class="entry-title">
@@ -487,7 +408,8 @@
 						{% endfor %}
 
 					</div>
-				<!-- Проекты light end-->
+				<!-- Section Projects end
+				=============================================-->
 					</div>
 				</div>
 			</div>

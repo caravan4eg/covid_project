@@ -107,11 +107,12 @@ class HomePageView(ListView):
     # get new covid data from https://api.covid19api.com
     get_covid_data()
 
-
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['projects8'] = Project.objects.all()[:9]
-        context['posts8'] = Post.objects.order_by('-published_at')[:7]
+        context['posts8'] = Post.objects.order_by('-published_at')[:8]
+        context['posts17'] = Post.objects.order_by('-published_at')[8:17]
+
         context['facts_last'] = Fact.objects.order_by('-published_at')[0]
         context['last_d'] = context['facts_last'].published_at.day
         context['last_m'] = context['facts_last'].published_at.month
