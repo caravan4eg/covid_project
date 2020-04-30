@@ -114,6 +114,8 @@ class HomePageView(ListView):
         context['posts17'] = Post.objects.order_by('-published_at')[8:17]
 
         context['facts_last'] = Fact.objects.order_by('-published_at')[0]
+        context['facts'] = Fact.objects.all() ###
+
         context['last_d'] = context['facts_last'].published_at.day
         context['last_m'] = context['facts_last'].published_at.month
         context['last_y'] = context['facts_last'].published_at.year

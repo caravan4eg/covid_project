@@ -1,6 +1,5 @@
 # TODO откуда брать данные
-# TODO посмотреть колины аналоги
-# TODO загрузка фото?
+# TODO  графики с тут бай
 
 
 from rest_framework import generics, viewsets
