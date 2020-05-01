@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<!-- Document Title
+    ============================================= -->
+{% block title %}| Новости {% endblock title %}
+
+{% block content %}
+		<!-- Page Title
+		============================================= -->
+		<section id="page-title" class="nobg">
+			<div class="container clearfix">
+				<h1>Новости</h1>
+				<span>Пандемия коронавируса в Беларуси</span>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'home' %} ">Главная</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Новости</li>
+				</ol>
+			</div>
+		</section><!-- #page-title end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+			<div class="content-wrap">
+				<div class="container clearfix">
+					<!-- Posts
+					============================================= -->
+					<div id="posts" class="post-grid grid-container post-masonry clearfix">
+
+                        {% if posts %}
+                        {% for post in posts  %}
+                            <div class="entry clearfix">
+                                <div class="entry-image">
+                                    <a href="{{ post.url }}" data-lightbox="image"><img class="image_fade" src="
+                                    {% if post.img_url %}
+										{{post.img_url }}
+									{% else %}
+										{{ post.img.url }}
+									{% endif %}" alt="{{ post.title }}"></a>
+                                </div>
+                                <div class="entry-title">
+                                    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                                </div>
+                                <ul class="entry-meta clearfix">
+                                    <li><i class="icon-calendar3"></i> {{  post.published_at | date:"j E Y" }}</li>
+
+                                    <li><a href="#">
+                                    <i class="icon-camera-retro"></i></a></li>
+                                </ul>
+                                <div class="entry-content">
+                                    <p>{{ post.description | truncatechars:250 }}</p>
+                                    <a href="{{ post.url }}" class="button button-rounded button-small nomargin">Подробнее</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                    <!-- #posts end -->
+				</div>
+			</div>
+		</section><!-- #content end -->
+{% endblock content %}
