@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheets
+	============================================= -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %} " type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %} " type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/dark.css' %} " type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/font-icons.css' %} " type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/animate.css' %} " type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %} " type="text/css" />
+
+
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %} " type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- Medical Demo Specific Stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %} " type="text/css" />
+
+	<link rel="stylesheet" href="{% static 'medical/fonts.css' %} " type="text/css" /><link rel="stylesheet" href="{% static 'medical/medical.css' %} " type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/swiper.css' %} " type="text/css" />
+
+	<!-- Document Title
+	============================================= -->
+	<title>covidMonitor - Новости, факты и проекты в Беларуси | {% block title %} {% endblock title %}
+	</title>
+
+	<style>
+		.form-control.error { border: 2px solid red; }
+	</style>
+</head>
+
+<body class="stretched" data-loader-html="<div id='css3-spinner-svg-pulse-wrapper'><svg id='css3-spinner-svg-pulse' version='1.2' height='210' width='550' xmlns='http://www.w3.org/2000/svg' viewport='0 0 60 60' xmlns:xlink='http://www.w3.org/1999/xlink'><path id='css3-spinner-pulse' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round' d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' /></svg></div>">
+
+    <!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+        <!-- Top Bar -->
+        {% include 'partials/_topbar.html' %}
+
+        <!-- Navbar -->
+        {% include 'partials/_navbar.html' %}
+
+        <!-- Main Content -->
+        {% block content %} {% endblock %}
+
+        <!-- Footer -->
+        {% include 'partials/_footer.html' %}
+
+    </div><!-- #wrapper end -->
+    <!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script src="{% static 'js/jquery.js' %} "></script>
+	<script src="{% static 'js/plugins.js' %} "></script>
+
+	<!-- Footer Scripts
+	============================================= -->
+	<script src="{% static 'js/functions.js' %} "></script>
+
+<!-- Charts JS
+	============================================= -->
+	<script src="{% static 'js/chart.js' %} "></script>
+	<script src="{% static 'js/chart-utils.js' %} "></script>
+	<script src="{% static 'js/components/moment.js' %} "></script>
+
+	<script>
+		var endpoint = '/api/v1/facts/'
+		var published_at = []
+		var confirmed = []
+		var recovered = []
+		var deaths = []
+
+		$.ajax({
+			method: "GET",
+			url: endpoint,
+			success: function(data){
+				for(var i=data.length-30; i < data.length; i++){
+					d = new Date(data[i].published_at)
+					published_at.unshift(d)
+					confirmed.unshift(data[i].confirmed)
+					recovered.unshift(data[i].recovered)
+					deaths.unshift(data[i].deaths)
+				}
+				console.log(published_at);
+
+
+			},
+			error: function(error_data){
+				console.log("error")
+				console.log(error_data)
+			}
+		})
+
+		var timeFormat = 'DD/MM';
+
+		function newDate(days) {
+			return moment().add(days, 'd').toDate();
+		}
+
+		function newDateString(days) {
+			return moment().add(days, 'd').format(timeFormat);
+		}
+
+		function newTimestamp(days) {
+			return moment().add(days, 'd').unix();
+		}
+
+		var color = Chart.helpers.color;
+		var config = {
+			type: 'line',
+			data: {
+				labels: published_at,
+				datasets:
+				[
+					{
+					label: "Заболели",
+					backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.red,
+					fill: false,
+					data: confirmed,
+				},
+				{
+					label: "Выздоровели",
+					backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.green,
+					fill: false,
+					data: recovered,
+				},
+				{
+					label: "Умерли",
+					backgroundColor: color(window.chartColors.black).alpha(0.5).rgbString(),
+					borderColor: window.chartColors.black,
+					fill: false,
+					data: deaths,
+				}]
+			},
+			options: {
+				title:{
+					text: "Статистика COVID-19 в Беларуси"
+				},
+				scales: {
+					xAxes: [{
+						type: "time",
+						time: {
+							format: timeFormat,
+							// round: 'day'
+							tooltipFormat: 'DD/MM'
+						},
+						scaleLabel: {
+							display: false,
+							labelString: 'Дата'
+						}
+					}, ],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Количество'
+						}
+					}]
+				},
+			}
+		};
+		const myChart = document.querySelectorAll('.animate-me');
+
+		observer = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			if (entry.intersectionRatio > 0) {
+			console.log('in the view');
+			var ctx = document.getElementById("chart-0").getContext("2d");
+			window.myLine = new Chart(ctx, config);
+
+			} else {
+			console.log('out of view');
+			}
+		});
+		});
+
+		myChart.forEach(image => {
+		observer.observe(image);
+		});
+	</script>
+
+</body>
+</html>

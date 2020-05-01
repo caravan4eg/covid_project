@@ -1,4 +1,3 @@
-<!--TODO нормальный парсинг статей и данных-->
 {% load static %}
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -29,7 +28,8 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>covidMonitor - Новости, факты и проекты в Беларуси</title>
+	<title>covidMonitor - Пандемия covid-19 в Беларуси {% block title %} {% endblock title %}
+	</title>
 
 	<style>
 		.form-control.error { border: 2px solid red; }
@@ -47,6 +47,7 @@
 		<!-- Header
 		============================================= -->
 		{% include 'partials/_navbar.html' %}
+
 		<!-- Slider
 		============================================= -->
 		<section id="slider" class="slider-element swiper_wrapper full-screen clearfix" data-loop="true" data-autoplay="5000">
@@ -87,6 +88,7 @@
 
 		<!-- Facts banner start
 		============================================= -->
+				<div id="covid"></div>
 				<div class="section notopmargin nobottommargin">
 					<div class="container clearfix">
 
@@ -218,6 +220,7 @@
 
 				<!-- Section Projects
 				=============================================-->
+				<div id="projects"></div>
 				<div class="container clearfix">
 
 					<div class="col_full bottommargin-lg clearfix">

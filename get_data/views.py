@@ -114,7 +114,7 @@ class HomePageView(ListView):
         context['posts17'] = Post.objects.order_by('-published_at')[8:17]
 
         context['facts_last'] = Fact.objects.order_by('-published_at')[0]
-        context['facts'] = Fact.objects.all() ###
+        context['facts'] = Fact.objects.all()
 
         context['last_d'] = context['facts_last'].published_at.day
         context['last_m'] = context['facts_last'].published_at.month
@@ -122,6 +122,17 @@ class HomePageView(ListView):
         context['loop_times'] = range(1, 8)
         context['i'] = 0
 
+        return context
+
+
+class BlogPageView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'blog.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogPageView, self).get_context_data(**kwargs)
+        context["posts"] = Post.objects.order_by('-published_at')
         return context
 
 

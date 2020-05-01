@@ -10,6 +10,7 @@ from PIL import Image
 # from imagekit.models.fields import ImageSpecField
 # from imagekit.processors import ResizeToFit, Adjust, ResizeToFill
 
+
 class Fact(models.Model):
     city = models.CharField(max_length=100, blank=True, null=True, default='')
     country = models.CharField(max_length=100, default='Беларусь')
