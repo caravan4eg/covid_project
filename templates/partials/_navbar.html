@@ -1,14 +1,37 @@
 {% load static %}
+<header id="header">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% include 'partials/_topbar.html' %}
+    <div id="header-wrap">
 
-</body>
-</html>
+        <div class="container clearfix">
+
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <!-- Logo
+            ============================================= -->
+            <div id="logo">
+                <a href="index.html" class="standard-logo"><img src="{% static 'medical/images/logo-medical.png' %} " alt="Logo"></a>
+                <a href="{% url 'home' %} " class="retina-logo"><img src="{% static 'medical/images/logo-medical@2x.png' %} " alt=" Logo"></a>
+            </div><!-- #logo end -->
+
+            <!-- Primary Navigation
+            ============================================= -->
+            <nav id="primary-menu" class="style-3">
+
+                <ul>
+                    <li class="current"><a href="{% url 'home' %} "><div>Главная</div></a></li>
+                    <li><a href="demos/medical/about-us.html"><div>Новости</div></a></li>
+                    <li><a href="demos/medical/departments.html"><div>Проекты</div></a></li>
+                    <li><a href="demos/medical/blog.html"><div>Коронавирус</div></a></li>
+                    <li><a href="./api/v1"><div>API</div></a></li>
+                    <li><a href="./api/v1"><div>О нас</div></a></li>
+
+                </ul>
+
+            </nav><!-- #primary-menu end -->
+
+        </div>
+
+    </div>
+
+</header><!-- #header end -->

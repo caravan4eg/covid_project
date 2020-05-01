@@ -1,3 +1,4 @@
+{% load static %}
 /* ----------------------------------------------------------------
 	Dark Scheme
 -----------------------------------------------------------------*/
@@ -351,8 +352,7 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 
 .dark .breadcrumb a:hover { color: #EEE; }
 
-.dark #page-title.page-title-pattern { background-image: url('../images/pattern2.png'); }
-
+.dark #page-title.page-title-pattern { background-image: url("{% static 'images/pattern2.png' %}"); }
 
 .dark .portfolio-filter { border-color: rgba(255,255,255,0.08); }
 
@@ -1684,4 +1684,3 @@ body #side-panel.dark #side-panel-trigger-close a {
 	.dark .pricing-box.pricing-extended .pricing-action-area { border-top-color: rgba(255,255,255,0.15); }
 
 }
-

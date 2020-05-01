@@ -225,7 +225,7 @@ body:not(.stretched) .slider-parallax .slider-parallax-inner { left: auto; }
 	width:100%;
 	height:100%;
 	margin: 0;
-	background: url('images/pattern2.png') repeat;
+	background: url("{% static 'images/pattern2.png' %}") repeat;
 }
 
 .swiper_wrapper .swiper-slide {
@@ -587,4 +587,3 @@ body:not(.stretched) .slider-parallax .slider-parallax-inner { left: auto; }
 
 .slider-element .owl-dots .owl-dot.active,
 .slider-element .owl-dots .owl-dot:hover { background-color: #FFF !important; }
-

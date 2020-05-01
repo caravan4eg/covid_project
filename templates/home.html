@@ -26,9 +26,6 @@
 
 	<link rel="stylesheet" href="{% static 'medical/fonts.css' %} " type="text/css" /><link rel="stylesheet" href="{% static 'medical/medical.css' %} " type="text/css" />
 	<link rel="stylesheet" href="{% static 'css/swiper.css' %} " type="text/css" />
-	<!--custom css-->
-	{% comment %} <link rel="stylesheet" href="{% static 'css/custom.css' %} " type="text/css" /> {% endcomment %}
-	<!-- / -->
 
 	<!-- Document Title
 	============================================= -->
@@ -37,95 +34,19 @@
 	<style>
 		.form-control.error { border: 2px solid red; }
 	</style>
-
 </head>
 
-<body class="stretched">
+<body class="stretched" data-loader-html="<div id='css3-spinner-svg-pulse-wrapper'><svg id='css3-spinner-svg-pulse' version='1.2' height='210' width='550' xmlns='http://www.w3.org/2000/svg' viewport='0 0 60 60' xmlns:xlink='http://www.w3.org/1999/xlink'><path id='css3-spinner-pulse' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round' d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' /></svg></div>">
 
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
-
 		<!-- Top Bar
 		============================================= -->
-		<div id="top-bar">
-
-			<div class="container clearfix">
-
-				<div class="col_half nobottommargin">
-
-					<!-- Top Links
-					============================================= -->
-					<div class="top-links">
-						<ul>
-							<li><a href="{% url 'home' %}">Home</a></li>
-							<li><a href="faqs.html">FAQs</a></li>
-							<li><a href="contact.html">Contact</a></li>
-
-						</ul>
-					</div><!-- .top-links end -->
-
-				</div>
-
-				<div class="col_half fright col_last nobottommargin">
-
-					<!-- Top Social
-					============================================= -->
-					<div id="top-social">
-						<ul>
-							<li><a href="#" class="si-facebook"><span class="ts-icon"><i class="icon-facebook"></i></span><span class="ts-text">Facebook</span></a></li>
-							<li><a href="#" class="si-github"><span class="ts-icon"><i class="icon-github-circled"></i></span><span class="ts-text">Github</span></a></li>
-							<li><a href="#" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
-
-							<li><a href="mailto:covidmonitor@gmail.com" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">covidmonitor@gmail.com</span></a></li>
-						</ul>
-					</div><!-- #top-social end -->
-
-				</div>
-
-			</div>
-
-		</div><!-- #top-bar end -->
-
+		{% include 'partials/_topbar.html' %}
 		<!-- Header
 		============================================= -->
-		<header id="header">
-
-			<div id="header-wrap">
-
-				<div class="container clearfix">
-
-					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-					<!-- Logo
-					============================================= -->
-					<div id="logo">
-						<a href="index.html" class="standard-logo"><img src="{% static 'medical/images/logo-medical.png' %} " alt="Logo"></a>
-						<a href="{% url 'home' %} " class="retina-logo"><img src="{% static 'medical/images/logo-medical@2x.png' %} " alt=" Logo"></a>
-					</div><!-- #logo end -->
-
-					<!-- Primary Navigation
-					============================================= -->
-					<nav id="primary-menu" class="style-3">
-
-						<ul>
-							<li class="current"><a href="{% url 'home' %} "><div>Главная</div></a></li>
-							<li><a href="demos/medical/about-us.html"><div>Новости</div></a></li>
-							<li><a href="demos/medical/departments.html"><div>Проекты</div></a></li>
-							<li><a href="demos/medical/blog.html"><div>Коронавирус</div></a></li>
-							<li><a href="./api/v1"><div>API</div></a></li>
-							<li><a href="./api/v1"><div>О нас</div></a></li>
-
-						</ul>
-
-					</nav><!-- #primary-menu end -->
-
-				</div>
-
-			</div>
-
-		</header><!-- #header end -->
-
+		{% include 'partials/_navbar.html' %}
 		<!-- Slider
 		============================================= -->
 		<section id="slider" class="slider-element swiper_wrapper full-screen clearfix" data-loop="true" data-autoplay="5000">
@@ -164,8 +85,8 @@
 			</div>
 		</section><!-- #slider end -->
 
-		<!--цифры начало
-		========================================================= -->
+		<!-- Facts banner start
+		============================================= -->
 				<div class="section notopmargin nobottommargin">
 					<div class="container clearfix">
 
@@ -216,7 +137,8 @@
 
 					</div>
 				</div>
-		<!--цифры конец
+		<!-- Facts banner end
+		============================================= -->
 
 		<!-- Content
 		============================================= -->
@@ -233,7 +155,7 @@
 
 							<div class="ipost clearfix">
 								<div class="entry-image">
-									<a href="https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Belarus" target="_blank"><img class="image_fade" src="{% static '/images/magazine/COVID-19_Cases_in_Belarus,_13.03.2020 (1).png' %} " alt="2020_coronavirus_pandemic_in_Belarus"></a>
+									<a href="https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Belarus" title="Уровень заболеваемости по областям Беларуси" target="_blank"><img class="image_fade" src="{% static '/images/magazine/COVID-19_Cases_in_Belarus,_13.03.2020 (1).png' %} " alt="2020_coronavirus_pandemic_in_Belarus"></a>
 								</div>
 								<!-- legenda start -->
 								<div style="text-align:justify2;">Подтвержденные случаи covid-19:
@@ -313,7 +235,7 @@
 								>
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="{{ project.url }}" target="_blank"><img class="image_fade" src="{{ project.img.url }} " alt="Image"></a>
+										<a href="{{ project.url }}" target="_blank"><img class="image_fade" src="{{ project.img.url }} " alt="{{ project.title }}" title="{{ project.title }}"></a>
 									</div>
 
 									<div class="entry-title">
@@ -339,9 +261,11 @@
 				</div>
 			</div>
 		</section><!-- #content end -->
+
 		<!-- Footer start -->
     	{% include 'partials/_footer.html' %}
 		<!-- Footer end -->
+
 	</div><!-- #wrapper end -->
 
 	<!-- Go To Top
@@ -469,10 +393,6 @@
 			var ctx = document.getElementById("chart-0").getContext("2d");
 			window.myLine = new Chart(ctx, config);
 
-
-
-
-
 			} else {
 			console.log('out of view');
 			}
@@ -482,8 +402,6 @@
 		myChart.forEach(image => {
 		observer.observe(image);
 		});
-
-
 	</script>
 </body>
 </html>
