@@ -1,0 +1,96 @@
+{% load static %}
+
+<footer id="footer" class="dark nobottommargin">
+        <div class="container clearfix">
+            <!-- Footer Widgets
+            ============================================= -->
+            <div class="footer-widgets-wrap clearfix">
+                <!--Info -->
+                <div class="col_one_third">
+                    <div class="widget clearfix">
+                        <div  style="background: url('{% static 'images/world-map.png' %} ') no-repeat center center;
+                            background-size: 100%;">
+                            <p><strong>Данные обновляются один раз в сутки и могут не учитывать последние изменения</strong></p>
+
+                            <address>
+                                <abbr title="Email Address"><strong>Email:</strong></abbr>
+                                covidmonitor@gmail.com
+                            </address>
+                            <p>
+                                Copyrights &copy; 2020 caravan4eg
+                            </p>
+                        </div> <!---->
+                    </div>
+                </div>
+                <!--Info sources-->
+                <div class="col_one_third">
+                <div class="widget widget_links clearfix">
+                    <h4>Источники информации</h4>
+                    <ul>
+                    <li><a href="https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU:ru" target="_blank">News Google</a></li>
+                    <li>
+                        <a
+                        href="https://www.tut.by/"
+                        >TUT.BY</a
+                        >
+                    </li>
+                    <li>
+                        <a href="https://coronavirus.jhu.edu/" target="_blank">CORONAVIRUS RESOURCE CENTER</a>
+                    </li>
+                    <li>
+                        <a href="http://minzdrav.gov.by/ru/" target="_blank">Минздрав РБ</a>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+                <!--Counters-->
+                <div class="col_one_third col_last">
+                    <div class="widget clearfix" style="margin-bottom: -20px;">
+
+                        <div class="row">
+                            <div class="col-lg-4 bottommargin-sm">
+                            <div class="counter counter-small" style="color: rgb(255, 0, 0);">
+                                <span
+                                data-from="50"
+                                data-to="{{ facts_last.confirmed }}"
+                                data-refresh-interval="150"
+                                data-speed="3000"
+                                data-comma="true"
+                                ></span>+
+                            </div>
+                            <h5 class="nobottommargin">Заболели</h5>
+                            </div>
+                            <div class="col-lg-4 bottommargin-sm">
+                            <div class="counter counter-small" style="color: #35BBAA;">
+                                <span
+                                data-from="550"
+                                data-to="{{ facts_last.recovered }}"
+                                data-refresh-interval="50"
+                                data-speed="3000"
+                                data-comma="true"
+                                ></span>+
+                            </div>
+                            <h5 class="nobottommargin">Выздоровели</h5>
+                            </div>
+
+                            <div class="col-lg-4 bottommargin-sm">
+                            <div class="counter counter-small" >
+                                <span
+                                data-from="5"
+                                data-to="{{ facts_last.deaths }} "
+                                data-refresh-interval="10"
+                                data-speed="3000"
+                                data-comma="true"
+                                ></span>+
+                            </div>
+                            <h5 class="nobottommargin">Умерли</h5>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- .footer-widgets-wrap end -->
+        </div>
+</footer>
