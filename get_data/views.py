@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from django.views.generic import ListView
 
 import requests
 import csv
 from api.models import Post, Fact, Project
 from datetime import date, timedelta
+
 
 def get_covid_data():
     """
@@ -62,9 +62,10 @@ def get_google_post():
     Restriction - 1 month ago
     """
     d = date.today() - timedelta(days=25)
+    d_str = d.isoformat() + '&'
     url = ('https://newsapi.org/v2/everything?'
            'q=беларусь%20covid&'
-           'from=f"{d.isoformat()}&"'
+           'from=d_str'
            'hl=ru&'
            'gl=RU&'
            'ceid=RU:ru&'
