@@ -1,13 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView
 
 import requests
 import csv
 from api.models import Post, Fact, Project
-
+from datetime import date, timedelta
 
 def get_covid_data():
+    """
+    Get covid data from API https://api.covid19api.com
+    """
     url = 'https://api.covid19api.com/total/dayone/country/belarus'
     response = requests.get(url)
 
@@ -18,14 +20,15 @@ def get_covid_data():
             'deaths': item['Deaths'],
             'recovered': item['Recovered'],
             'tests_made': 0,
-
         }
-
         print(covid_data)
         write_covid_db(covid_data)
 
 
 def write_covid_db(covid_data):
+    """
+    Write covid data to db Fact model
+    """
     covid_fact = Fact(confirmed=covid_data['confirmed'],
                       deaths=covid_data['deaths'],
                       recovered=covid_data['recovered'],
@@ -54,9 +57,14 @@ def write_google_post_csv(data):
 
 
 def get_google_post():
+    """
+    Get data from google news api
+    Restriction - 1 month ago
+    """
+    d = date.today() - timedelta(days=25)
     url = ('https://newsapi.org/v2/everything?'
            'q=беларусь%20covid&'
-           'from=2020-04-01&'
+           'from=f"{d.isoformat()}&"'
            'hl=ru&'
            'gl=RU&'
            'ceid=RU:ru&'
@@ -64,6 +72,7 @@ def get_google_post():
            'apiKey=a3b7cbcd401248e5876e1dfb8a49e27b'
            )
     r = requests.get(url)
+    print(r.json())
 
     for article in r.json()['articles']:
         data = {
@@ -82,6 +91,9 @@ def get_google_post():
 
 
 def write_post_db(data):
+    """
+    Writes data to db Post model
+    """
     post = Post(source_name=data['source_name'],
                 author=data['author'],
                 title=data['title'],
@@ -98,13 +110,12 @@ def write_post_db(data):
 
 
 class HomePageView(ListView):
-    # model = Project, Post, Fact
+    """
+    Get context for home.html
+    """
     model = Post
-    # context_object_name = 'posts'
     template_name = 'home.html'
-    # get new posts from News Google API
     get_google_post()
-    # get new covid data from https://api.covid19api.com
     get_covid_data()
 
     def get_context_data(self, **kwargs):
@@ -126,6 +137,9 @@ class HomePageView(ListView):
 
 
 class BlogPageView(ListView):
+    """
+    Get context data for Blog page
+    """
     model = Post
     context_object_name = 'posts'
     template_name = 'blog.html'
@@ -134,7 +148,3 @@ class BlogPageView(ListView):
         context = super(BlogPageView, self).get_context_data(**kwargs)
         context["posts"] = Post.objects.order_by('-published_at')
         return context
-
-
-def demo(request):
-    return render(request, 'demo-medical.html')
