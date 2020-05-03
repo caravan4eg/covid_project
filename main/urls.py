@@ -8,11 +8,19 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from rest_framework import routers
+from api.views import PostViewSet, ProjectViewSet, FactViewSet
+
+router = routers.DefaultRouter()
+router.register('facts', FactViewSet)
+router.register('posts', PostViewSet)
+router.register('projects', ProjectViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('api.urls')),
-    path('', include('get_data.urls')),
+    path('api/v1/', include(router.urls)),
+    path('', include('get_data.urls'))
 
 ]
 
