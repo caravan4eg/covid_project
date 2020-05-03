@@ -155,7 +155,31 @@ TODO deploy to Heroku
 		============================================= -->
 		<section id="content">
 			<div class="content-wrap">
-				<div class="clear"></div>
+				<div class="container clearfix animate-me">
+
+					<div class="fancy-title title-border">
+						<h3>Статистика по дням</h3>
+					</div>
+					<div class="row bottommargin-sm clearfix">
+					<!-- Charts start
+					============================================= -->
+						<div class="bottommargin col-lg-8 " style="max-width: 750px; min-height: 350px;">
+							<canvas id="chart-0"></canvas>
+						</div>
+
+					<!-- Charts end
+					============================================= -->
+					<div class="col-lg-4 bottommargin">
+						<!--Flickr photofeed -->
+						<div class="widget clearfix">
+							<h4>Пандемия в лицах</h4>
+							<div id="flickr-widget" class="flickr-feed masonry-thumbs" data-id="188236970@N04" data-count="16" data-type="user" data-lightbox="gallery"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="clear"></div>
 				<div class="container clearfix">
 					<div class="fancy-title title-border">
 						<h3>Уровень заболеваемости по областям</h3>
@@ -182,6 +206,7 @@ TODO deploy to Heroku
 						</div>
 					<!-- News right site -->
 						<div class="col-lg-4 bottommargin">
+
 						{% if posts8 %}
 							{% for post in posts8  %}
 							<div class="spost clearfix">
@@ -206,26 +231,15 @@ TODO deploy to Heroku
 							</div>
 							{% endfor %}
 						{% endif %}
+
 						</div>
+
 					</div>
 				</div>
 
 				<div class="clear"></div>
 
-				<div class="container clearfix">
-
-					<div class="fancy-title title-border">
-						<h3>Статистика по дням</h3>
-					</div>
-					<!-- New Charts Area
-					============================================= -->
-					<div class="bottommargin col-lg-12 divcenter animate-me" style="max-width: 750px; min-height: 350px;">
-						<canvas id="chart-0"></canvas>
-					</div>
-
-					<!-- New Charts Area
-					============================================= -->
-				</div>
+				<div class="clear"></div>
 
 				<!-- Section Projects
 				=============================================-->
@@ -269,8 +283,13 @@ TODO deploy to Heroku
 					</div>
 				<!-- Section Projects end
 				=============================================-->
+
+
 					</div>
 				</div>
+
+
+
 			</div>
 		</section><!-- #content end -->
 
